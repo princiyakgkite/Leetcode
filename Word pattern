@@ -1,0 +1,24 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        words = s.split()
+
+        if len(pattern) != len(words):
+            return False
+
+        charToWord = {}
+        wordToChar = {}
+
+        for c, word in zip(pattern, words):
+            if c in charToWord:
+                if charToWord[c] != word:
+                    return False
+            else:
+                charToWord[c] = word
+
+            if word in wordToChar:
+                if wordToChar[word] != c:
+                    return False
+            else:
+                wordToChar[word] = c
+
+        return True
